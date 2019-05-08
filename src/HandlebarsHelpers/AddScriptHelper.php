@@ -5,16 +5,18 @@ namespace HandlebarsHelpers;
 use Handlebars\Helper;
 use Handlebars\Context;
 use Handlebars\Template;
-use WC\Joomla\ContentModel;
+use WC\Joomla\Helper\AppContext;
 
-class I18nHelper implements Helper
+class AddScriptHelper implements Helper
 {
     public function execute(Template $template, Context $context, $args, $source)
     {
         $parsedArgs = $template->parseArguments($args);
-        if (isset($parsedArgs[0]) && $parsedArgs[0]) {
-            $key = $context->get($parsedArgs[0]);
-            return ContentModel::getI18N($key ? $key : $parsedArgs[0]);
+        if (is_array($parsedArgs)) {
+            foreach ($parsedArgs as $arg) {
+                $src = $context->get($arg);
+                AppContext::doc()->addScript($src);
+            }
         }
         return '';
     }

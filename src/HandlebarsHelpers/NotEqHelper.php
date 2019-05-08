@@ -6,7 +6,7 @@ use Handlebars\Helper;
 use Handlebars\Context;
 use Handlebars\Template;
 
-class EqHelper implements Helper
+class NotEqHelper implements Helper
 {
     public function execute(Template $template, Context $context, $args, $source)
     {
@@ -21,7 +21,7 @@ class EqHelper implements Helper
             $tmp2 = is_array($tmp2) || is_object($tmp2) ? json_encode($tmp2) : '' . $tmp2;
         }
 
-        if ($tmp1 === $tmp2) {
+        if ($tmp1 !== $tmp2) {
             $template->setStopToken('else');
             $buffer = $template->render($context);
             $template->setStopToken(false);

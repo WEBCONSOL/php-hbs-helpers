@@ -1,46 +1,29 @@
 <?php
+
 namespace HandlebarsHelpers;
 
-use Handlebars\Context;
 use Handlebars\Helper;
+use Handlebars\Context;
 use Handlebars\Template;
 
 class IfHelper implements Helper
 {
-    private static $dels = ['(',')','||','&&','==','===','!=','!=='];
-
+    /**
+     * Execute the helper
+     *
+     * @param \GX2CMS\TemplateEngine\Handlebars\Template  $template The template instance
+     * @param \GX2CMS\TemplateEngine\Handlebars\Context   $context  The current context
+     * @param \GX2CMS\TemplateEngine\Handlebars\Arguments $args     The arguments passed the the helper
+     * @param string                $source   The source
+     *
+     * @return mixed
+     */
     public function execute(Template $template, Context $context, $args, $source)
     {
         $parsedArgs = $template->parseArguments($args);
-        $arguments = [];
+        $tmp = $context->get($parsedArgs[0]);
 
-        for ($i = 0; $i < sizeof($parsedArgs); $i++) {
-            $tmp = $context->get($parsedArgs[$i]);
-            if (!in_array($tmp, self::$dels)) {
-                if ($tmp==='false'||$tmp==='0'||$tmp<0) {
-                    $arguments[$i] = 'false';
-                }
-                else {
-                    $arguments[$i] = $tmp ? 'true' : 'false';
-                }
-            }
-            else {
-                $arguments[$i] = $tmp;
-            }
-        }
-
-        $valid = false;
-
-        if (!empty($arguments)) {
-            try {
-                $valid = eval('return ('.implode('', $arguments).')'.';');
-            }
-            catch (\Exception $e) {
-                $valid = false;
-            }
-        }
-
-        if ($valid) {
+        if ($tmp) {
             $template->setStopToken('else');
             $buffer = $template->render($context);
             $template->setStopToken(false);

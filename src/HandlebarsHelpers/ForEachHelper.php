@@ -1,21 +1,4 @@
 <?php
-/**
- * This file is part of Handlebars-php
- *
- * PHP version 5.3
- *
- * @category  Xamin
- * @package   Handlebars
- * @author    fzerorubigd <fzerorubigd@gmail.com>
- * @author    Behrooz Shabani <everplays@gmail.com>
- * @author    Dmitriy Simushev <simushevds@gmail.com>
- * @author    Jeff Turcotte <jeff.turcotte@gmail.com>
- * @author    John Slegers <slegersjohn@gmail.com>
- * @copyright 2014 Authors
- * @license   MIT <http://opensource.org/licenses/MIT>
- * @version   GIT: $Id$
- * @link      http://xamin.ir
- */
 
 namespace HandlebarsHelpers;
 
@@ -23,7 +6,7 @@ use Handlebars\Helper;
 use Handlebars\Context;
 use Handlebars\Template;
 
-class EachHelper implements Helper
+class ForEachHelper implements Helper
 {
     public function execute(Template $template, Context $context, $args, $source)
     {
@@ -50,13 +33,14 @@ class EachHelper implements Helper
                     '@last' => ($index === $lastIndex),
                     '@itemlistsize' => $size,
                     '@itemlistindex' => $index,
-                    '@itemListfirst' => ($index === 0),
-                    '@itemListlast' => ($index === $lastIndex),
+                    '@itemlistfirst' => ($index === 0),
+                    '@itemlistlast' => ($index === $lastIndex),
                     '@item' => $var
                 );
                 if (!$isList) {
                     $specialVariables['@key'] = $key;
                 }
+                
                 $context->pushSpecialVariables($specialVariables);
                 $context->push($var);
                 $template->setStopToken('else');

@@ -19,7 +19,7 @@ final class Hbs
         $hbsEngine = new \Handlebars\Handlebars([
             'partials_loader' => new \Handlebars\Loader\FilesystemLoader($layoutDir, ['extension' => '.hbs'])
         ]);
-        \HandlebarsHelpers\Loader::load($hbsEngine);
+        Loader::load($hbsEngine);
         return $hbsEngine->render($hbsTmpl, $context);
     }
 }

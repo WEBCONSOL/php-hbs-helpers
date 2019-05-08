@@ -6,7 +6,7 @@ use Handlebars\Helper;
 use Handlebars\Context;
 use Handlebars\Template;
 
-class EqHelper implements Helper
+class GtHelper implements Helper
 {
     public function execute(Template $template, Context $context, $args, $source)
     {
@@ -14,14 +14,11 @@ class EqHelper implements Helper
         $tmp1 = $context->get($parsedArgs[0]);
         $tmp2 = $context->get($parsedArgs[1]);
 
-        if (!is_string($tmp1)) {
-            $tmp1 = is_array($tmp1) || is_object($tmp1) ? json_encode($tmp1) : '' . $tmp1;
-        }
-        if (!is_string($tmp2)) {
-            $tmp2 = is_array($tmp2) || is_object($tmp2) ? json_encode($tmp2) : '' . $tmp2;
+        if (!is_numeric($tmp1) || !is_numeric($tmp2)) {
+            die("Both arguments must be numerical value");
         }
 
-        if ($tmp1 === $tmp2) {
+        if ($tmp1 > $tmp2) {
             $template->setStopToken('else');
             $buffer = $template->render($context);
             $template->setStopToken(false);
