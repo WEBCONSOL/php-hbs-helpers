@@ -5,7 +5,6 @@ namespace HandlebarsHelpers;
 use Handlebars\Helper;
 use Handlebars\Context;
 use Handlebars\Template;
-use WC\Joomla\Helper\AppContext;
 
 class AddStyleSheetHelper implements Helper
 {
@@ -15,7 +14,12 @@ class AddStyleSheetHelper implements Helper
         if (is_array($parsedArgs)) {
             foreach ($parsedArgs as $arg) {
                 $src = $context->get($arg);
-                AppContext::doc()->addStyleSheet($src);
+                try {
+                    \WC\Joomla\Helper\AppContext::doc()->addStyleSheet($src);
+                }
+                catch (\Exception $e) {
+                    return '<link href="'.$src.'" rel="stylesheet" type="text/css" />';
+                }
             }
         }
         return '';
