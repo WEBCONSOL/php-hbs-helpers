@@ -12,6 +12,15 @@ class ForEachHelper implements Helper
     {
         $positionalArgs = $args->getPositionalArguments();
         $tmp = $context->get($positionalArgs[0]);
+        if (isset($positionalArgs[1])) {
+            $index = $context->get($positionalArgs[1]);
+            if (isset($tmp[$index])) {
+                $tmp = $tmp[$index];
+                if (isset($positionalArgs[2])) {
+                    $index = $context->get($positionalArgs[1]);
+                }
+            }
+        }
         $buffer = '';
 
         if (!$tmp) {
@@ -40,7 +49,6 @@ class ForEachHelper implements Helper
                 if (!$isList) {
                     $specialVariables['@key'] = $key;
                 }
-                
                 $context->pushSpecialVariables($specialVariables);
                 $context->push($var);
                 $template->setStopToken('else');

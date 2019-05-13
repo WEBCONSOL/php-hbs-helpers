@@ -1,26 +1,9 @@
 <?php
-/**
- * This file is part of Handlebars-php
- *
- * PHP version 5.3
- *
- * @category  Xamin
- * @package   Handlebars
- * @author    fzerorubigd <fzerorubigd@gmail.com>
- * @author    Behrooz Shabani <everplays@gmail.com>
- * @author    Dmitriy Simushev <simushevds@gmail.com>
- * @author    Jeff Turcotte <jeff.turcotte@gmail.com>
- * @author    John Slegers <slegersjohn@gmail.com>
- * @copyright 2014 Authors
- * @license   MIT <http://opensource.org/licenses/MIT>
- * @version   GIT: $Id$
- * @link      http://xamin.ir
- */
 
 namespace HandlebarsHelpers;
 
-use Handlebars\Helper;
 use Handlebars\Context;
+use Handlebars\Helper;
 use Handlebars\Template;
 
 class EachHelper implements Helper
@@ -29,6 +12,15 @@ class EachHelper implements Helper
     {
         $positionalArgs = $args->getPositionalArguments();
         $tmp = $context->get($positionalArgs[0]);
+        if (isset($positionalArgs[1])) {
+            $index = $context->get($positionalArgs[1]);
+            if (isset($tmp[$index])) {
+                $tmp = $tmp[$index];
+                if (isset($positionalArgs[2])) {
+                    $index = $context->get($positionalArgs[1]);
+                }
+            }
+        }
         $buffer = '';
 
         if (!$tmp) {
@@ -50,8 +42,8 @@ class EachHelper implements Helper
                     '@last' => ($index === $lastIndex),
                     '@itemlistsize' => $size,
                     '@itemlistindex' => $index,
-                    '@itemListfirst' => ($index === 0),
-                    '@itemListlast' => ($index === $lastIndex),
+                    '@itemlistfirst' => ($index === 0),
+                    '@itemlistlast' => ($index === $lastIndex),
                     '@item' => $var
                 );
                 if (!$isList) {
