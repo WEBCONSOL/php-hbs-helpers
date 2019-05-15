@@ -15,8 +15,11 @@ class FindElementByKeyHelper implements Helper
         $key = $context->get($parsedArgs[1]);
         $buffer = '';
 
-        if ((is_array($list) || is_object($list)) && isset($list[$key])) {
+        if (is_array($list) && isset($list[$key])) {
             $buffer = $list[$key];
+        }
+        else if (is_object($list) && property_exists($list, $key)) {
+            $buffer = $list->{$key};
         }
 
         return $buffer;

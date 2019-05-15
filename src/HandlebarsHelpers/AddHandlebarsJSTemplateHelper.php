@@ -11,11 +11,17 @@ class AddHandlebarsJSTemplateHelper implements Helper
     public function execute(Template $template, Context $context, $args, $source)
     {
         $parsedArgs = $template->parseArguments($args);
-        if (is_array($parsedArgs)) {
-            foreach ($parsedArgs as $arg) {
-                $src = $context->get($arg);
+        $paths = isset($parsedArgs[0]) ? $context->get($parsedArgs[0]) : $parsedArgs[0];
+        $html = [];
+        if (!empty($paths) && is_array($paths)) {
+            foreach ($paths as $key=>$path) {
+                if (file_exists($path)) {
+                    $html[] = '<script type="text/x-handlebars-template" data-hbstmpl="'.$key.'">';
+                    $html[] = file_get_contents($path);
+                    $html[] = '</'.'script>';
+                }
             }
         }
-        return '';
+        return implode('', $html);
     }
 }

@@ -5,7 +5,6 @@ namespace HandlebarsHelpers;
 use Handlebars\Helper;
 use Handlebars\Context;
 use Handlebars\Template;
-use WC\Joomla\Helper\AppContext;
 
 class AddScriptHelper implements Helper
 {
@@ -15,7 +14,12 @@ class AddScriptHelper implements Helper
         if (is_array($parsedArgs)) {
             foreach ($parsedArgs as $arg) {
                 $src = $context->get($arg);
-                AppContext::doc()->addScript($src);
+                try {
+                    \WC\Joomla\Helper\AppContext::doc()->addScript($src);
+                }
+                catch (\Exception $e) {
+                    return '<script src="'.$src.'"></script>';
+                }
             }
         }
         return '';

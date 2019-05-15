@@ -5,7 +5,6 @@ namespace HandlebarsHelpers;
 use Handlebars\Helper;
 use Handlebars\Context;
 use Handlebars\Template;
-use WC\Joomla\Helper\AppContext;
 
 class AddStyleDeclarationHelper implements Helper
 {
@@ -15,7 +14,12 @@ class AddStyleDeclarationHelper implements Helper
         if (is_array($parsedArgs)) {
             foreach ($parsedArgs as $arg) {
                 $src = $context->get($arg);
-                AppContext::doc()->addStyleDeclaration($src);
+                try {
+                    \WC\Joomla\Helper\AppContext::doc()->addStyleDeclaration($src);
+                }
+                catch (\Exception $e) {
+                    return '<style type="text/css">'.$src.'</style>';
+                }
             }
         }
         return '';

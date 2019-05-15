@@ -1,0 +1,40 @@
+<?php
+
+namespace HandlebarsHelpers;
+
+use Handlebars\Helper;
+use Handlebars\Context;
+use Handlebars\Template;
+
+class IssetHelper implements Helper
+{
+    private static $dels = ['(',')','||','&&','==','===','!=','!=='];
+
+    public function execute(Template $template, Context $context, $args, $source)
+    {
+        $parsedArgs = $template->parseArguments($args);
+        try {
+            $valid = isset($parsedArgs[0]) ? $context->get($parsedArgs[0], true) : -1;
+        }
+        catch (\Exception $e) {
+            $valid = -1;
+        }
+        if ($valid === -1) {
+            $valid = false;
+        }
+
+        if ($valid) {
+            $template->setStopToken('else');
+            $buffer = $template->render($context);
+            $template->setStopToken(false);
+            $template->discard($context);
+        } else {
+            $template->setStopToken('else');
+            $template->discard($context);
+            $template->setStopToken(false);
+            $buffer = $template->render($context);
+        }
+
+        return $buffer;
+    }
+}
