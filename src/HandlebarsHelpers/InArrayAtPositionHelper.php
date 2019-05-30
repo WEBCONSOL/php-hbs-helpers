@@ -6,26 +6,23 @@ use Handlebars\Helper;
 use Handlebars\Context;
 use Handlebars\Template;
 
-class IssetHelper implements Helper
+class InArrayAtPositionHelper implements Helper
 {
     public function execute(Template $template, Context $context, $args, $source)
     {
         $parsedArgs = $template->parseArguments($args);
-        try {
-            $valid = isset($parsedArgs[0]) ? $context->get($parsedArgs[0], true) : -1;
-        }
-        catch (\Exception $e) {
-            $valid = -1;
-        }
+        $needle = isset($parsedArgs[0]) ? $context->get($parsedArgs[0]) : null;
+        $haystack = isset($parsedArgs[1]) ? $context->get($parsedArgs[1]) : null;
+        $key = isset($parsedArgs[2]) ? $context->get($parsedArgs[2]) : null;
 
-        $valid = !($valid === -1);
-
-        if ($valid) {
+        if ($haystack && $key!==null && is_array($haystack) && isset($haystack[$key]) && $haystack[$key]===$needle) {
             $template->setStopToken('else');
             $buffer = $template->render($context);
             $template->setStopToken(false);
             $template->discard($context);
-        } else {
+            $found = true;
+        }
+        else {
             $template->setStopToken('else');
             $template->discard($context);
             $template->setStopToken(false);
