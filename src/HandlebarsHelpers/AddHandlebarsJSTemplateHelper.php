@@ -13,13 +13,20 @@ class AddHandlebarsJSTemplateHelper implements Helper
         $parsedArgs = $template->parseArguments($args);
         $paths = isset($parsedArgs[0]) ? $context->get($parsedArgs[0]) : $parsedArgs[0];
         $html = [];
-        if (!empty($paths) && is_array($paths)) {
-            foreach ($paths as $key=>$path) {
-                if (file_exists($path)) {
-                    $html[] = '<script type="text/x-handlebars-template" data-hbstmpl="'.$key.'">';
-                    $html[] = file_get_contents($path);
-                    $html[] = '</'.'script>';
+        if (!empty($paths)) {
+            if (is_array($paths)) {
+                foreach ($paths as $key=>$path) {
+                    if (file_exists($path)) {
+                        $html[] = '<script type="text/x-handlebars-template" data-hbstmpl="'.$key.'">';
+                        $html[] = file_get_contents($path);
+                        $html[] = '</'.'script>';
+                    }
                 }
+            }
+            else if (is_string($paths) && file_exists($paths)) {
+                $html[] = '<script type="text/x-handlebars-template" data-hbstmpl="'.pathinfo($path, PATHINFO_FILENAME).'">';
+                $html[] = file_get_contents($paths);
+                $html[] = '</'.'script>';
             }
         }
         return implode('', $html);
