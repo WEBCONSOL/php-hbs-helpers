@@ -6,7 +6,7 @@ use Handlebars\Helper;
 use Handlebars\Context;
 use Handlebars\Template;
 
-class In_ArrayHelper implements Helper
+class IfNot_In_ArrayHelper implements Helper
 {
     public function execute(Template $template, Context $context, $args, $source)
     {
@@ -17,16 +17,16 @@ class In_ArrayHelper implements Helper
 
         if ((is_string($needle) || is_numeric($needle)) && is_array($haystack) && in_array($needle, $haystack)) {
             $template->setStopToken('else');
+            $template->discard($context);
+            $template->setStopToken(false);
+            $buffer = $template->render($context);
+        }
+        else {
+            $template->setStopToken('else');
             $buffer = $template->render($context);
             $template->setStopToken(false);
             $template->discard($context);
             $found = true;
-        }
-        else {
-            $template->setStopToken('else');
-            $template->discard($context);
-            $template->setStopToken(false);
-            $buffer = $template->render($context);
         }
 
         return $buffer;
