@@ -5,6 +5,7 @@ namespace HandlebarsHelpers;
 use Handlebars\Helper;
 use Handlebars\Context;
 use Handlebars\Template;
+use WC\Utilities\Logger;
 
 class RenderJoomlaModuleByPositionHelper implements Helper
 {
