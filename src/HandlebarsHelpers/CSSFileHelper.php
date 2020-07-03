@@ -6,16 +6,13 @@ use Handlebars\Helper;
 use Handlebars\Context;
 use Handlebars\Template;
 
-class AddStyleSheetHelper implements Helper
+class CSSFileHelper implements Helper
 {
     public function execute(Template $template, Context $context, $args, $source)
     {
         $parsedArgs = $template->parseArguments($args);
-        if (is_array($parsedArgs)) {
-            foreach ($parsedArgs as $arg) {
-                $src = $context->get($arg);
-                return '<link href="'.$src.'" rel="stylesheet" type="text/css" />';
-            }
+        if ($parsedArgs[0]) {
+            return '<link rel="stylesheet" type="text/css" href="'.$parsedArgs[0].'"/>';
         }
         return '';
     }

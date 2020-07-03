@@ -2,11 +2,14 @@
 
 namespace HandlebarsHelpers;
 
+use Handlebars\Handlebars;
+
 class Loader
 {
     private static $packagePfx = 'HandlebarsHelpers\\';
 
-    public static function load(\Handlebars\Handlebars $hbs) {
+    public static function load(Handlebars $hbs)
+    {
         $list = glob(__DIR__ . '/*Helper.php');
         foreach ($list as $helper)
         {

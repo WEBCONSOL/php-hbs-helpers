@@ -6,7 +6,7 @@ use Handlebars\Helper;
 use Handlebars\Context;
 use Handlebars\Template;
 
-class JsFileHelper implements Helper
+class JSFileHelper implements Helper
 {
     public function execute(Template $template, Context $context, $args, $source)
     {

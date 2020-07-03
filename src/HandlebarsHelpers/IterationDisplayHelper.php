@@ -6,17 +6,15 @@ use Handlebars\Helper;
 use Handlebars\Context;
 use Handlebars\Template;
 
-class AddStyleDeclarationHelper implements Helper
+class IterationDisplayHelper implements Helper
 {
     public function execute(Template $template, Context $context, $args, $source)
     {
         $parsedArgs = $template->parseArguments($args);
-        if (is_array($parsedArgs)) {
-            foreach ($parsedArgs as $arg) {
-                $src = $context->get($arg);
-                return '<style type="text/css">'.$src.'</style>';
-            }
+        $v = isset($parsedArgs[0]) ? $context->get($parsedArgs[0]) : '';
+        if (is_numeric($v)) {
+            return (int)$v + 1;
         }
-        return '';
+        return $v;
     }
 }
