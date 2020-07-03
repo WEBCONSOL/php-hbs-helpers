@@ -5,6 +5,7 @@ namespace HandlebarsHelpers;
 use Handlebars\Helper;
 use Handlebars\Context;
 use Handlebars\Template;
+use WC\Utilities\EncodingUtil;
 
 class Base64_DecodeHelper implements Helper
 {
@@ -13,7 +14,7 @@ class Base64_DecodeHelper implements Helper
         $parsedArgs = $template->parseArguments($args);
         $buffer = $context->get($parsedArgs[0]);
         if ($buffer) {
-            if (StringUtil::isBase64Encoded($buffer)) {
+            if (EncodingUtil::isBase64Encoded($buffer)) {
                 $buffer = base64_decode($buffer);
             }
         }

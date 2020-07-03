@@ -2,6 +2,9 @@
 
 namespace HandlebarsHelpers;
 
+use Handlebars\Handlebars;
+use Handlebars\Loader\FilesystemLoader;
+
 final class Hbs
 {
     private function __construct(){}
@@ -18,8 +21,8 @@ final class Hbs
             $hbsTmpl = $tmpl;
         }
 
-        $hbsEngine = new \Handlebars\Handlebars([
-            'partials_loader' => new \Handlebars\Loader\FilesystemLoader($layoutDir, ['extension' => '.hbs'])
+        $hbsEngine = new Handlebars([
+            'partials_loader' => new FilesystemLoader($layoutDir, ['extension' => '.hbs'])
         ]);
 
         Loader::load($hbsEngine);

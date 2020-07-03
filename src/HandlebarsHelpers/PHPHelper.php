@@ -24,7 +24,7 @@ class PHPHelper implements Helper
                 $buffer = call_user_func_array($func, $args);
             }
             else {
-                new \Exception("function ".$func." does not exist.");
+                throw new \RuntimeException("function ".$func." does not exist.", 500);
             }
         }
         $type = strtolower(gettype($buffer));

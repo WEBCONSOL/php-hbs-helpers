@@ -14,12 +14,7 @@ class AddStyleDeclarationHelper implements Helper
         if (is_array($parsedArgs)) {
             foreach ($parsedArgs as $arg) {
                 $src = $context->get($arg);
-                try {
-                    \WC\Joomla\Helper\AppContext::doc()->addStyleDeclaration($src);
-                }
-                catch (\Exception $e) {
-                    return '<style type="text/css">'.$src.'</style>';
-                }
+                return '<style type="text/css">'.$src.'</style>';
             }
         }
         return '';

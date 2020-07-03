@@ -14,12 +14,7 @@ class AddScriptDeclarationHelper implements Helper
         if (is_array($parsedArgs)) {
             foreach ($parsedArgs as $arg) {
                 $src = $context->get($arg);
-                try {
-                    \WC\Joomla\Helper\AppContext::doc()->addScriptDeclaration($src);
-                }
-                catch (\Exception $e) {
-                    return '<script>'.$src.'</script>';
-                }
+                return '<script>'.$src.'</script>';
             }
         }
         return '';

@@ -24,7 +24,7 @@ class AddHandlebarsJSTemplateHelper implements Helper
                 }
             }
             else if (is_string($paths) && file_exists($paths)) {
-                $html[] = '<script type="text/x-handlebars-template" data-hbstmpl="'.pathinfo($path, PATHINFO_FILENAME).'">';
+                $html[] = '<script type="text/x-handlebars-template" data-hbstmpl="'.pathinfo($paths, PATHINFO_FILENAME).'">';
                 $html[] = file_get_contents($paths);
                 $html[] = '</'.'script>';
             }

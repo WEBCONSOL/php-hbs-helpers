@@ -14,12 +14,7 @@ class AddStyleSheetHelper implements Helper
         if (is_array($parsedArgs)) {
             foreach ($parsedArgs as $arg) {
                 $src = $context->get($arg);
-                try {
-                    \WC\Joomla\Helper\AppContext::doc()->addStyleSheet($src);
-                }
-                catch (\Exception $e) {
-                    return '<link href="'.$src.'" rel="stylesheet" type="text/css" />';
-                }
+                return '<link href="'.$src.'" rel="stylesheet" type="text/css" />';
             }
         }
         return '';

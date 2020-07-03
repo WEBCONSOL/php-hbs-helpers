@@ -14,12 +14,7 @@ class AddScriptHelper implements Helper
         if (is_array($parsedArgs)) {
             foreach ($parsedArgs as $arg) {
                 $src = $context->get($arg);
-                try {
-                    \WC\Joomla\Helper\AppContext::doc()->addScript($src);
-                }
-                catch (\Exception $e) {
-                    return '<script src="'.$src.'"></script>';
-                }
+                return '<script src="'.$src.'"></script>';
             }
         }
         return '';
