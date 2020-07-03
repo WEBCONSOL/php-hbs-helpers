@@ -4,7 +4,7 @@
     "description": "PHP Handlebars Helpers",
     "type": "library",
     "keywords": ["handlebars"],
-    "homepage": "git@github.com:WEBCONSOL/php-hbs-helpers.git",
+    "homepage": "https://github.com/WEBCONSOL/php-hbs-helpers",
     "license": "MIT",
     "authors": [
         {
