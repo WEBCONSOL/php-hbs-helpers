@@ -5,6 +5,7 @@ namespace HandlebarsHelpers;
 use Handlebars\Helper;
 use Handlebars\Context;
 use Handlebars\Template;
+use WC\Utilities\Minify;
 
 class CSSDeclarationHelper implements Helper
 {
@@ -13,9 +14,9 @@ class CSSDeclarationHelper implements Helper
         $parsedArgs = $template->parseArguments($args);
         if ($parsedArgs[0]) {
             if (pathinfo($parsedArgs[0], PATHINFO_EXTENSION) === 'css') {
-                return '<style type="text/css">'.$template->getEngine()->getPartialsLoader()->load($parsedArgs[0]).'</style>';
+                return '<style type="text/css">'.Minify::css($template->getEngine()->getPartialsLoader()->load($parsedArgs[0])).'</style>';
             }
-            return '<style type="text/css">'.$parsedArgs[0].'</style>';
+            return '<style type="text/css">'.Minify::css($parsedArgs[0]).'</style>';
         }
         return '';
     }
