@@ -5,7 +5,7 @@ namespace HandlebarsHelpers;
 use Handlebars\Helper;
 use Handlebars\Context;
 use Handlebars\Template;
-use WC\Utilities\EncodingUtil;
+use HandlebarsHelpers\Utils\EncodingUtil;
 
 class Base64_DecodeHelper implements Helper
 {

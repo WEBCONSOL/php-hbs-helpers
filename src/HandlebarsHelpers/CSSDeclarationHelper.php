@@ -5,7 +5,7 @@ namespace HandlebarsHelpers;
 use Handlebars\Helper;
 use Handlebars\Context;
 use Handlebars\Template;
-use WC\Utilities\Minify;
+use HandlebarsHelpers\Utils\Minify;
 
 class CSSDeclarationHelper implements Helper
 {

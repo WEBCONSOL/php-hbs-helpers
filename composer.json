@@ -14,8 +14,7 @@
         }
     ],
     "require": {
-        "php": ">=7.0",
-        "webconsol/php-utilities": "dev-master"
+        "php": ">=7.0"
     },
     "autoload": {
         "psr-0" : {
