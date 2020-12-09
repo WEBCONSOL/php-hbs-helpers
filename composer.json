@@ -14,7 +14,9 @@
         }
     ],
     "require": {
-        "php": ">=7.0"
+        "php": ">=7.0",
+        "mrclay/jsmin-php": ">=2.4.0",
+        "natxet/cssmin": "v3.0.6"
     },
     "autoload": {
         "psr-0" : {
