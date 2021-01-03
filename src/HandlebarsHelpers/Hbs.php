@@ -2,18 +2,22 @@
 
 namespace HandlebarsHelpers;
 
-use Handlebars\Handlebars;
-use Handlebars\Loader\FilesystemLoader;
+use HandlebarsHelpers\Utils\Engine;
+use HandlebarsHelpers\Utils\PartialLoader;
 
 final class Hbs
 {
     private function __construct(){}
 
-    public static function render(string $tmpl, array $context, string $layoutDir = ''): string {
+    private static $tmplDir = '';
+
+    public static function setTmplDir(string $d): void {self::$tmplDir=$d;}
+
+    public static function render(string $tmpl, array $context, string $layoutDir = '', array $options=array()): string {
 
         if (is_file($tmpl)) {
             $hbsTmpl = file_get_contents($tmpl);
-            if (!$layoutDir) {
+            if (empty($layoutDir)) {
                 $layoutDir = dirname($tmpl);
             }
         }
@@ -21,12 +25,18 @@ final class Hbs
             $hbsTmpl = $tmpl;
         }
 
-        $hbsEngine = new Handlebars([
-            'partials_loader' => new FilesystemLoader($layoutDir, ['extension' => '.hbs'])
-        ]);
+        if (empty($options)) {
+            $options = [
+                'partials_loader' => new PartialLoader(
+                    (self::$tmplDir?self::$tmplDir:$layoutDir).DIRECTORY_SEPARATOR.'hbs',
+                    ['extension' => '.hbs']
+                )
+            ];
+        }
 
-        Loader::load($hbsEngine);
-
-        return $hbsEngine->render($hbsTmpl, $context);
+        $engine = new Engine($options);
+        $responseContent = $engine->render($hbsTmpl, $context);
+        unset($engine, $options);
+        return $responseContent;
     }
 }
