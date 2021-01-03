@@ -28,7 +28,7 @@ final class Hbs
         if (empty($options)) {
             $options = [
                 'partials_loader' => new PartialLoader(
-                    (self::$tmplDir?self::$tmplDir:$layoutDir).DIRECTORY_SEPARATOR.'hbs',
+                    (self::$tmplDir?self::$tmplDir:$layoutDir),
                     ['extension' => '.hbs']
                 )
             ];
