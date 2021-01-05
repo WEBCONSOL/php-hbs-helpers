@@ -1,5 +1,6 @@
 # PHP Handlebars Helpers
-========================
+==============================
+
 ``
 composer require webconsol/php-hbs-helpers "dev-master"
 ``
