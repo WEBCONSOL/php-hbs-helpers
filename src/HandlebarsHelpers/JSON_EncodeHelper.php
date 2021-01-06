@@ -2,8 +2,8 @@
 
 namespace HandlebarsHelpers;
 
-use Handlebars\Helper;
 use Handlebars\Context;
+use Handlebars\Helper;
 use Handlebars\Template;
 
 class JSON_EncodeHelper implements Helper

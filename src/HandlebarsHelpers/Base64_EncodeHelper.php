@@ -2,8 +2,8 @@
 
 namespace HandlebarsHelpers;
 
-use Handlebars\Helper;
 use Handlebars\Context;
+use Handlebars\Helper;
 use Handlebars\Template;
 
 class Base64_EncodeHelper implements Helper

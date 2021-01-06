@@ -2,8 +2,8 @@
 
 namespace HandlebarsHelpers;
 
-use Handlebars\Helper;
 use Handlebars\Context;
+use Handlebars\Helper;
 use Handlebars\Template;
 
 class FA_StatusHelper implements Helper
@@ -15,10 +15,10 @@ class FA_StatusHelper implements Helper
         if ($buffer) {
             if (is_numeric($buffer)) {
                 $buffer = (int)$buffer;
-                $buffer = '<i class="fa fa-'.($buffer>0?'check-circle':'circle').'"></i>';
+                $buffer = '<i class="fa fa-' . ($buffer > 0 ? 'check-circle' : 'circle') . '"></i>';
             }
             else {
-                $buffer = '<i class="fa fa-'.($buffer==='yes'?'check-circle':'circle').'"></i>';
+                $buffer = '<i class="fa fa-' . ($buffer === 'yes' ? 'check-circle' : 'circle') . '"></i>';
             }
         }
         return $buffer;

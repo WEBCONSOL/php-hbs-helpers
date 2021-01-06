@@ -2,8 +2,8 @@
 
 namespace HandlebarsHelpers;
 
-use Handlebars\Helper;
 use Handlebars\Context;
+use Handlebars\Helper;
 use Handlebars\Template;
 
 class JSFileHelper implements Helper
@@ -12,7 +12,7 @@ class JSFileHelper implements Helper
     {
         $parsedArgs = $template->parseArguments($args);
         if ($parsedArgs[0]) {
-            return '<script src="'.$parsedArgs[0].'"></script>';
+            return '<script src="' . $parsedArgs[0] . '"></script>';
         }
         return '';
     }

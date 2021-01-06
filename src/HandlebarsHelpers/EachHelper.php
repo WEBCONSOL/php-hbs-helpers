@@ -5,6 +5,7 @@ namespace HandlebarsHelpers;
 use Handlebars\Context;
 use Handlebars\Helper;
 use Handlebars\Template;
+use Traversable;
 
 class EachHelper implements Helper
 {
@@ -28,7 +29,8 @@ class EachHelper implements Helper
             $template->discard();
             $template->setStopToken(false);
             $buffer = $template->render($context);
-        } elseif (is_array($tmp) || $tmp instanceof \Traversable) {
+        }
+        elseif (is_array($tmp) || $tmp instanceof Traversable) {
             $size = count($tmp);
             $isList = is_array($tmp) && (array_keys($tmp) === range(0, $size - 1));
             $index = 0;
@@ -36,15 +38,15 @@ class EachHelper implements Helper
 
             foreach ($tmp as $key => $var) {
                 $specialVariables = array(
-                    '@size' => $size,
-                    '@index' => $index,
-                    '@first' => ($index === 0),
-                    '@last' => ($index === $lastIndex),
-                    '@itemlistsize' => $size,
+                    '@size'          => $size,
+                    '@index'         => $index,
+                    '@first'         => ($index === 0),
+                    '@last'          => ($index === $lastIndex),
+                    '@itemlistsize'  => $size,
                     '@itemlistindex' => $index,
                     '@itemlistfirst' => ($index === 0),
-                    '@itemlistlast' => ($index === $lastIndex),
-                    '@item' => $var
+                    '@itemlistlast'  => ($index === $lastIndex),
+                    '@item'          => $var
                 );
                 if (!$isList) {
                     $specialVariables['@key'] = $key;

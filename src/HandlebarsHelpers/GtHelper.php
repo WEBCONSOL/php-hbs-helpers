@@ -2,9 +2,10 @@
 
 namespace HandlebarsHelpers;
 
-use Handlebars\Helper;
 use Handlebars\Context;
+use Handlebars\Helper;
 use Handlebars\Template;
+use RuntimeException;
 
 class GtHelper implements Helper
 {
@@ -15,7 +16,7 @@ class GtHelper implements Helper
         $tmp2 = $context->get($parsedArgs[1]);
 
         if (!is_numeric($tmp1) || !is_numeric($tmp2)) {
-            throw new \RuntimeException("Both arguments must be numerical value", 500);
+            throw new RuntimeException("Both arguments must be numerical value", 500);
         }
 
         if ($tmp1 > $tmp2) {
@@ -23,7 +24,8 @@ class GtHelper implements Helper
             $buffer = $template->render($context);
             $template->setStopToken(false);
             $template->discard($context);
-        } else {
+        }
+        else {
             $template->setStopToken('else');
             $template->discard($context);
             $template->setStopToken(false);

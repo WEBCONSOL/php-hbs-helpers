@@ -18,4 +18,6 @@
 
 namespace HandlebarsHelpers;
 
-class IncludeHelper extends RequireHelper {}
+class IncludeHelper extends RequireHelper
+{
+}

@@ -2,13 +2,14 @@
 
 namespace HandlebarsHelpers;
 
-use Handlebars\Helper;
+use Exception;
 use Handlebars\Context;
+use Handlebars\Helper;
 use Handlebars\Template;
 
 class IfHelper implements Helper
 {
-    private static $dels = ['(',')','||','&&','==','===','!=','!=='];
+    private static $dels = ['(', ')', '||', '&&', '==', '===', '!=', '!=='];
 
     public function execute(Template $template, Context $context, $args, $source)
     {
@@ -18,7 +19,7 @@ class IfHelper implements Helper
         for ($i = 0; $i < sizeof($parsedArgs); $i++) {
             $tmp = $context->get($parsedArgs[$i]);
             if (!in_array($tmp, self::$dels)) {
-                if ($tmp==='false'||$tmp==='0'||$tmp<0) {
+                if ($tmp === 'false' || $tmp === '0' || $tmp < 0) {
                     $arguments[$i] = 'false';
                 }
                 else {
@@ -34,9 +35,9 @@ class IfHelper implements Helper
 
         if (!empty($arguments)) {
             try {
-                $valid = eval('return ('.implode('', $arguments).')'.';');
+                $valid = eval('return (' . implode('', $arguments) . ')' . ';');
             }
-            catch (\Exception $e) {
+            catch (Exception $e) {
                 $valid = false;
             }
         }
@@ -46,7 +47,8 @@ class IfHelper implements Helper
             $buffer = $template->render($context);
             $template->setStopToken(false);
             $template->discard($context);
-        } else {
+        }
+        else {
             $template->setStopToken('else');
             $template->discard($context);
             $template->setStopToken(false);

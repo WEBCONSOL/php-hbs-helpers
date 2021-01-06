@@ -2,9 +2,10 @@
 
 namespace HandlebarsHelpers;
 
-use Handlebars\Helper;
 use Handlebars\Context;
+use Handlebars\Helper;
 use Handlebars\Template;
+use RuntimeException;
 
 class PHPHelper implements Helper
 {
@@ -16,7 +17,7 @@ class PHPHelper implements Helper
             $func = $context->get($parsedArgs[0]);
             if (function_exists($func)) {
                 $args = [];
-                for($i = 1; $i < sizeof($parsedArgs); $i++) {
+                for ($i = 1; $i < sizeof($parsedArgs); $i++) {
                     if (isset($parsedArgs[$i])) {
                         $args[] = $context->get($parsedArgs[$i]);
                     }
@@ -24,7 +25,7 @@ class PHPHelper implements Helper
                 $buffer = call_user_func_array($func, $args);
             }
             else {
-                throw new \RuntimeException("function ".$func." does not exist.", 500);
+                throw new RuntimeException("function " . $func . " does not exist.", 500);
             }
         }
         $type = strtolower(gettype($buffer));
@@ -34,7 +35,8 @@ class PHPHelper implements Helper
                 $buffer = $template->render($context);
                 $template->setStopToken(false);
                 $template->discard($context);
-            } else {
+            }
+            else {
                 $template->setStopToken('else');
                 $template->discard($context);
                 $template->setStopToken(false);

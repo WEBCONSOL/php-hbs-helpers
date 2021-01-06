@@ -2,8 +2,8 @@
 
 namespace HandlebarsHelpers;
 
-use Handlebars\Helper;
 use Handlebars\Context;
+use Handlebars\Helper;
 use Handlebars\Template;
 
 class InArrayAtPositionHelper implements Helper
@@ -15,7 +15,7 @@ class InArrayAtPositionHelper implements Helper
         $haystack = isset($parsedArgs[1]) ? $context->get($parsedArgs[1]) : null;
         $key = isset($parsedArgs[2]) ? $context->get($parsedArgs[2]) : null;
 
-        if ($haystack && $key!==null && is_array($haystack) && isset($haystack[$key]) && $haystack[$key]===$needle) {
+        if ($haystack && $key !== null && is_array($haystack) && isset($haystack[$key]) && $haystack[$key] === $needle) {
             $template->setStopToken('else');
             $buffer = $template->render($context);
             $template->setStopToken(false);

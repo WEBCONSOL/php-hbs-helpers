@@ -15,7 +15,7 @@ class RequireHelper implements Helper
         if (sizeof($parsedArgs) === 3) {
             $root = isset($parsedArgs[0]) ? $context->get($parsedArgs[0]) : '';
             $name = isset($parsedArgs[1]) ? $context->get($parsedArgs[1]) : '';
-            $partialTmpl = str_replace('//', '/', $root.'/'.$name);
+            $partialTmpl = str_replace('//', '/', $root . '/' . $name);
         }
         else {
             $partialTmpl = isset($parsedArgs[0]) ? $context->get($parsedArgs[0]) : '';

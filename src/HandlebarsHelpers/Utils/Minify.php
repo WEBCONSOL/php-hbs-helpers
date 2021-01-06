@@ -3,21 +3,25 @@
 namespace HandlebarsHelpers\Utils;
 
 if (!class_exists("\JSMin\JSMin", false)) {
-    throw new \RuntimeException("\HandlebarsHelpers\Utils\Minify requires mrclay/jsmin-php and natxet/cssmin", 500);
+    throw new RuntimeException("\HandlebarsHelpers\Utils\Minify requires mrclay/jsmin-php and natxet/cssmin", 500);
 }
 
-use JSMin\JSMin;
 use CssMin;
+use JSMin\JSMin;
+use RuntimeException;
 
-class Minify {
+class Minify
+{
 
     // HTML Minifier
-    public static function html($input): string {
+    public static function html($input)
+    : string
+    {
         if (trim($input) === "") {
             return $input;
         }
         // Remove extra white-space(s) between HTML attribute(s)
-        $input = preg_replace_callback('#<([^\/\s<>!]+)(?:\s+([^<>]*?)\s*|\s*)(\/?)>#s', function($matches) {
+        $input = preg_replace_callback('#<([^\/\s<>!]+)(?:\s+([^<>]*?)\s*|\s*)(\/?)>#s', function ($matches){
             return '<' . $matches[1] . preg_replace('#([^\s=]+)(\=([\'"]?)(.*?)\3)?(\s+|$)#s', ' $1$2', $matches[2]) . $matches[3] . '>';
         }, str_replace("\r", "", $input));
         // Minify inline CSS declaration(s)
@@ -67,7 +71,9 @@ class Minify {
     }
 
     // CSS Minifier => http://ideone.com/Q5USEF + improvement(s)
-    public static function css($input): string {
+    public static function css($input)
+    : string
+    {
         if (trim($input) === "") {
             return $input;
         }
@@ -75,7 +81,9 @@ class Minify {
     }
 
     // JavaScript Minifier
-    public static function js($input): string {
+    public static function js($input)
+    : string
+    {
         if (trim($input) === "") {
             return $input;
         }

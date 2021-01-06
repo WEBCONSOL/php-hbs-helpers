@@ -7,13 +7,19 @@ use HandlebarsHelpers\Utils\PartialLoader;
 
 final class Hbs
 {
-    private function __construct(){}
-
     private static $tmplDir = '';
 
-    public static function setTmplDir(string $d): void {self::$tmplDir=$d;}
+    private function __construct(){ }
 
-    public static function render(string $tmpl, array $context, string $layoutDir = '', array $options=array()): string {
+    public static function setTmplDir(string $d)
+    : void
+    {
+        self::$tmplDir = $d;
+    }
+
+    public static function render(string $tmpl, array $context, string $layoutDir = '', array $options = array())
+    : string
+    {
 
         if (is_file($tmpl)) {
             $hbsTmpl = file_get_contents($tmpl);
@@ -28,7 +34,7 @@ final class Hbs
         if (empty($options)) {
             $options = [
                 'partials_loader' => new PartialLoader(
-                    (self::$tmplDir?self::$tmplDir:$layoutDir),
+                    (self::$tmplDir ? self::$tmplDir : $layoutDir),
                     ['extension' => '.hbs']
                 )
             ];

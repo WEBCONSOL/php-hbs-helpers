@@ -2,8 +2,8 @@
 
 namespace HandlebarsHelpers;
 
-use Handlebars\Helper;
 use Handlebars\Context;
+use Handlebars\Helper;
 use Handlebars\Template;
 
 class IsOddHelper implements Helper
@@ -18,7 +18,8 @@ class IsOddHelper implements Helper
             $buffer = $template->render($context);
             $template->setStopToken(false);
             $template->discard();
-        } else {
+        }
+        else {
             $template->setStopToken('else');
             $template->discard();
             $template->setStopToken(false);

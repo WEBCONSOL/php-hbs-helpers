@@ -2,8 +2,8 @@
 
 namespace HandlebarsHelpers;
 
-use Handlebars\Helper;
 use Handlebars\Context;
+use Handlebars\Helper;
 use Handlebars\Template;
 
 class UnlessHelper implements Helper
@@ -17,7 +17,8 @@ class UnlessHelper implements Helper
             $template->setStopToken('else');
             $buffer = $template->render($context);
             $template->setStopToken(false);
-        } else {
+        }
+        else {
             $template->setStopToken('else');
             $template->discard();
             $template->setStopToken(false);

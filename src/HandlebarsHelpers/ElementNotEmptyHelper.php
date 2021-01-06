@@ -2,8 +2,8 @@
 
 namespace HandlebarsHelpers;
 
-use Handlebars\Helper;
 use Handlebars\Context;
+use Handlebars\Helper;
 use Handlebars\Template;
 
 class ElementNotEmptyHelper implements Helper
@@ -19,7 +19,8 @@ class ElementNotEmptyHelper implements Helper
             $buffer = $template->render($context);
             $template->setStopToken(false);
             $template->discard($context);
-        } else {
+        }
+        else {
             $template->setStopToken('else');
             $template->discard($context);
             $template->setStopToken(false);

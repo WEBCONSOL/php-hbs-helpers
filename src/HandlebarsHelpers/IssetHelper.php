@@ -2,8 +2,9 @@
 
 namespace HandlebarsHelpers;
 
-use Handlebars\Helper;
+use Exception;
 use Handlebars\Context;
+use Handlebars\Helper;
 use Handlebars\Template;
 
 class IssetHelper implements Helper
@@ -14,7 +15,7 @@ class IssetHelper implements Helper
         try {
             $valid = isset($parsedArgs[0]) ? $context->get($parsedArgs[0], true) : -1;
         }
-        catch (\Exception $e) {
+        catch (Exception $e) {
             $valid = -1;
         }
 
@@ -25,7 +26,8 @@ class IssetHelper implements Helper
             $buffer = $template->render($context);
             $template->setStopToken(false);
             $template->discard($context);
-        } else {
+        }
+        else {
             $template->setStopToken('else');
             $template->discard($context);
             $template->setStopToken(false);

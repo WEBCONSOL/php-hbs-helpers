@@ -11,8 +11,7 @@ class Loader
     public static function load(Handlebars $hbs)
     {
         $list = glob(__DIR__ . '/*Helper.php');
-        foreach ($list as $helper)
-        {
+        foreach ($list as $helper) {
             $className = pathinfo($helper, PATHINFO_FILENAME);
             $cls = self::$packagePfx . $className;
             $helperName = str_replace('helper', '', strtolower($className));

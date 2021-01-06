@@ -2,8 +2,8 @@
 
 namespace HandlebarsHelpers;
 
-use Handlebars\Helper;
 use Handlebars\Context;
+use Handlebars\Helper;
 use Handlebars\Template;
 
 class CSSFileHelper implements Helper
@@ -12,7 +12,7 @@ class CSSFileHelper implements Helper
     {
         $parsedArgs = $template->parseArguments($args);
         if ($parsedArgs[0]) {
-            return '<link rel="stylesheet" type="text/css" href="'.$parsedArgs[0].'"/>';
+            return '<link rel="stylesheet" type="text/css" href="' . $parsedArgs[0] . '"/>';
         }
         return '';
     }
