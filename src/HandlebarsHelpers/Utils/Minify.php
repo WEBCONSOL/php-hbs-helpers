@@ -2,6 +2,10 @@
 
 namespace HandlebarsHelpers\Utils;
 
+if (!class_exists("\JSMin\JSMin", false)) {
+    throw new \RuntimeException("\HandlebarsHelpers\Utils\Minify requires mrclay/jsmin-php and natxet/cssmin", 500);
+}
+
 use JSMin\JSMin;
 use CssMin;
 
