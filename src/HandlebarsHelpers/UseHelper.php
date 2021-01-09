@@ -20,12 +20,14 @@ namespace HandlebarsHelpers;
 
 use Handlebars\Context;
 use Handlebars\Helper;
+use Handlebars\StringWrapper;
 use Handlebars\Template;
 
-class BindAttrHelper implements Helper
+class UseHelper implements Helper
 {
     public function execute(Template $template, Context $context, $args, $source)
     {
-        return $args;
+        $parsedArgs = $template->parseArguments($args);
+        return new StringWrapper(json_encode($parsedArgs));
     }
 }
