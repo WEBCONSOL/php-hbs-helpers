@@ -2,6 +2,7 @@
 
 namespace HandlebarsHelpers;
 
+use GX2CMS\Project\Model;
 use HandlebarsHelpers\Utils\Engine;
 use HandlebarsHelpers\Utils\PartialLoader;
 use JsonSerializable;
@@ -117,7 +118,11 @@ class Hbs
         }
         if (class_exists($class, false)) {
             $classObject = new $class();
-            if (method_exists($classObject, 'jsonSerialize')) {
+            if ($classObject instanceof Model) {
+                $classObject->process();
+                return $classObject->jsonSerialize();
+            }
+            else if (method_exists($classObject, 'jsonSerialize')) {
                 return $classObject->jsonSerialize();
             }
             else {

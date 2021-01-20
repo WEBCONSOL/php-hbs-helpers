@@ -29,8 +29,9 @@ class UseHelper implements Helper
     {
         $parsedArgs = $template->parseArguments($args);
         if (sizeof($parsedArgs) === 2) {
+            $resourcePath = (string)$parsedArgs[0];
             $varName = (string)$parsedArgs[1];
-            $obj = [$varName => Hbs::getBundleModel((string)$parsedArgs[0])];
+            $obj = [$varName => Hbs::getBundleModel($resourcePath)];
             $context->push($obj);
             $html = $template->render($obj);
         }

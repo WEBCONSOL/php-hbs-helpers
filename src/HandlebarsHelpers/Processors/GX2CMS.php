@@ -209,9 +209,9 @@ class GX2CMS extends Processor
     : void
     {
         if (!empty($dom)) {
-            $namespace = str_replace(['${',"'",'"'], '', $attr->value);
             $varName = $dom->hasAttribute($this->attrs['varname']) ? $dom->getAttribute($this->attrs['varname']) : '';
-            $this->context[$varName] = Hbs::getBundleModel($namespace);
+            //$namespace = str_replace(['${',"'",'"'], '', $attr->value);
+            //$this->context[$varName] = Hbs::getBundleModel($namespace);
             $html = DOMQuery::getContent($dom);
             (new GX2CMS())->process($html, $this->context);
             $source = Hbs::HBS_TOKENS[0].'#use \''.$attr->value.'\' '."'".$varName."'".Hbs::HBS_TOKENS[1].
