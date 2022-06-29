@@ -6,16 +6,16 @@ use Handlebars\Context;
 use Handlebars\Helper;
 use Handlebars\Template;
 
-class CSSDeclarationHelper implements Helper
+class Add_Script_Declaration implements Helper
 {
     public function execute(Template $template, Context $context, $args, $source)
     {
         $parsedArgs = $template->parseArguments($args);
         if ($parsedArgs[0]) {
-            if (pathinfo($parsedArgs[0], PATHINFO_EXTENSION) === 'css') {
-                return '<style type="text/css">' . $template->getEngine()->getPartialsLoader()->load($parsedArgs[0]) . '</style>';
+            if (pathinfo($parsedArgs[0], PATHINFO_EXTENSION) === 'js') {
+                return '<script type="text/javascript">' . $template->getEngine()->getPartialsLoader()->load($parsedArgs[0]) . '</script>';
             }
-            return '<style type="text/css">' . $parsedArgs[0] . '</style>';
+            return '<script>' . $parsedArgs[0] . '</script>';
         }
         return '';
     }

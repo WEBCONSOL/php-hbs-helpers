@@ -6,13 +6,14 @@ use Handlebars\Context;
 use Handlebars\Helper;
 use Handlebars\Template;
 
-class Str_RepeatHelper implements Helper
+class CSS_File implements Helper
 {
     public function execute(Template $template, Context $context, $args, $source)
     {
         $parsedArgs = $template->parseArguments($args);
-        $input = $context->get($parsedArgs[0]);
-        $multiplier = $context->get($parsedArgs[1]);
-        return str_repeat($input, $multiplier);
+        if ($parsedArgs[0]) {
+            return '<link rel="stylesheet" type="text/css" href="' . $parsedArgs[0] . '"/>';
+        }
+        return '';
     }
 }

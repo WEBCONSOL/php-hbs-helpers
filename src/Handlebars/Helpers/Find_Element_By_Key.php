@@ -6,7 +6,7 @@ use Handlebars\Context;
 use Handlebars\Helper;
 use Handlebars\Template;
 
-class FindElementByKeyHelper implements Helper
+class Find_Element_By_Key implements Helper
 {
     public function execute(Template $template, Context $context, $args, $source)
     {

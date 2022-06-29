@@ -5,20 +5,17 @@ namespace Handlebars\Helpers;
 use Handlebars\Context;
 use Handlebars\Helper;
 use Handlebars\Template;
+use Handlebars\Utils\EncodingUtil;
 
-class FA_StatusHelper implements Helper
+class Base64_Decode implements Helper
 {
     public function execute(Template $template, Context $context, $args, $source)
     {
         $parsedArgs = $template->parseArguments($args);
         $buffer = $context->get($parsedArgs[0]);
         if ($buffer) {
-            if (is_numeric($buffer)) {
-                $buffer = (int)$buffer;
-                $buffer = '<i class="fa fa-' . ($buffer > 0 ? 'check-circle' : 'circle') . '"></i>';
-            }
-            else {
-                $buffer = '<i class="fa fa-' . ($buffer === 'yes' ? 'check-circle' : 'circle') . '"></i>';
+            if (EncodingUtil::isBase64Encoded($buffer)) {
+                $buffer = base64_decode($buffer);
             }
         }
         return $buffer;

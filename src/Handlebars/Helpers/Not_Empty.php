@@ -6,19 +6,14 @@ use Handlebars\Context;
 use Handlebars\Helper;
 use Handlebars\Template;
 
-class LtEqHelper implements Helper
+class Not_Empty implements Helper
 {
     public function execute(Template $template, Context $context, $args, $source)
     {
         $parsedArgs = $template->parseArguments($args);
-        $tmp1 = $context->get($parsedArgs[0]);
-        $tmp2 = $context->get($parsedArgs[1]);
+        $arr = $context->get($parsedArgs[0]);
 
-        if (!is_numeric($tmp1) || !is_numeric($tmp2)) {
-            die("Both arguments must be numerical value");
-        }
-
-        if ($tmp1 <= $tmp2) {
+        if (is_array($arr) && !empty($arr)) {
             $template->setStopToken('else');
             $buffer = $template->render($context);
             $template->setStopToken(false);

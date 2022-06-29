@@ -6,15 +6,22 @@ use Handlebars\Context;
 use Handlebars\Helper;
 use Handlebars\Template;
 
-class ElementNotEmptyHelper implements Helper
+class NotEq implements Helper
 {
     public function execute(Template $template, Context $context, $args, $source)
     {
         $parsedArgs = $template->parseArguments($args);
-        $list = $context->get($parsedArgs[0]);
-        $key = $context->get($parsedArgs[1]);
+        $tmp1 = $context->get($parsedArgs[0]);
+        $tmp2 = $context->get($parsedArgs[1]);
 
-        if ((is_array($list) || is_object($list)) && isset($list[$key])) {
+        if (!is_string($tmp1)) {
+            $tmp1 = is_array($tmp1) || is_object($tmp1) ? json_encode($tmp1) : '' . $tmp1;
+        }
+        if (!is_string($tmp2)) {
+            $tmp2 = is_array($tmp2) || is_object($tmp2) ? json_encode($tmp2) : '' . $tmp2;
+        }
+
+        if ($tmp1 !== $tmp2) {
             $template->setStopToken('else');
             $buffer = $template->render($context);
             $template->setStopToken(false);

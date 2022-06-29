@@ -6,25 +6,24 @@ use Handlebars\Context;
 use Handlebars\Helper;
 use Handlebars\Template;
 
-class IfNot_In_ArrayHelper implements Helper
+class IsOdd implements Helper
 {
     public function execute(Template $template, Context $context, $args, $source)
     {
         $parsedArgs = $template->parseArguments($args);
-        $needle = $context->get($parsedArgs[0]);
-        $haystack = $context->get($parsedArgs[1]);
+        $tmp = (int)$context->get($parsedArgs[0]);
 
-        if ((is_string($needle) || is_numeric($needle)) && is_array($haystack) && in_array($needle, $haystack)) {
+        if (($tmp % 2) !== 0) {
             $template->setStopToken('else');
-            $template->discard();
-            $template->setStopToken(false);
             $buffer = $template->render($context);
+            $template->setStopToken(false);
+            $template->discard();
         }
         else {
             $template->setStopToken('else');
-            $buffer = $template->render($context);
-            $template->setStopToken(false);
             $template->discard();
+            $template->setStopToken(false);
+            $buffer = $template->render($context);
         }
 
         return $buffer;

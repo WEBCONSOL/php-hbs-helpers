@@ -5,15 +5,21 @@ namespace Handlebars\Helpers;
 use Handlebars\Context;
 use Handlebars\Helper;
 use Handlebars\Template;
+use RuntimeException;
 
-class IsOddHelper implements Helper
+class Lt implements Helper
 {
     public function execute(Template $template, Context $context, $args, $source)
     {
         $parsedArgs = $template->parseArguments($args);
-        $tmp = (int)$context->get($parsedArgs[0]);
+        $tmp1 = $context->get($parsedArgs[0]);
+        $tmp2 = $context->get($parsedArgs[1]);
 
-        if (($tmp % 2) !== 0) {
+        if (!is_numeric($tmp1) || !is_numeric($tmp2)) {
+            throw new RuntimeException("Both arguments must be numerical value", 500);
+        }
+
+        if ($tmp1 < $tmp2) {
             $template->setStopToken('else');
             $buffer = $template->render($context);
             $template->setStopToken(false);

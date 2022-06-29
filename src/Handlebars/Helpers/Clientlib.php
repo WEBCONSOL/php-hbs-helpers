@@ -27,7 +27,7 @@ use Handlebars\Exception\Error;
 use Handlebars\Processors\Processor;
 use Handlebars\Utils\ClientlibManager;
 
-class ClientlibHelper implements Helper
+class Clientlib implements Helper
 {
     public function execute(Template $template, Context $context, $args, $source)
     {

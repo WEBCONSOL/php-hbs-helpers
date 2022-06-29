@@ -6,16 +6,15 @@ use Handlebars\Context;
 use Handlebars\Helper;
 use Handlebars\Template;
 
-class InArrayAtPositionHelper implements Helper
+class Element_Not_Empty implements Helper
 {
     public function execute(Template $template, Context $context, $args, $source)
     {
         $parsedArgs = $template->parseArguments($args);
-        $needle = isset($parsedArgs[0]) ? $context->get($parsedArgs[0]) : null;
-        $haystack = isset($parsedArgs[1]) ? $context->get($parsedArgs[1]) : null;
-        $key = isset($parsedArgs[2]) ? $context->get($parsedArgs[2]) : null;
+        $list = $context->get($parsedArgs[0]);
+        $key = $context->get($parsedArgs[1]);
 
-        if ($haystack && $key !== null && is_array($haystack) && isset($haystack[$key]) && $haystack[$key] === $needle) {
+        if ((is_array($list) || is_object($list)) && isset($list[$key])) {
             $template->setStopToken('else');
             $buffer = $template->render($context);
             $template->setStopToken(false);

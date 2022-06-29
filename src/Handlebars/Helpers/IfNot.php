@@ -7,7 +7,7 @@ use Handlebars\Context;
 use Handlebars\Helper;
 use Handlebars\Template;
 
-class IfNotHelper implements Helper
+class IfNot implements Helper
 {
     private static $dels = ['(', ')', '||', '&&', '==', '===', '!=', '!=='];
 

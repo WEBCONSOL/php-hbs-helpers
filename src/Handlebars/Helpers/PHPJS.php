@@ -7,7 +7,7 @@ use Handlebars\Helper;
 use Handlebars\Template;
 use RuntimeException;
 
-class PHPHelper implements Helper
+class PHPJS implements Helper
 {
     public function execute(Template $template, Context $context, $args, $source)
     {

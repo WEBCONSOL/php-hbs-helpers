@@ -7,7 +7,7 @@ use Handlebars\Helper;
 use Handlebars\Template;
 use RuntimeException;
 
-class GetContentHelper implements Helper
+class Get_Content implements Helper
 {
     public function execute(Template $template, Context $context, $args, $source)
     {

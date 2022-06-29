@@ -7,7 +7,7 @@ use Handlebars\Helper;
 use Handlebars\Template;
 use Traversable;
 
-class GridHelper implements Helper
+class Grid implements Helper
 {
     public function execute(Template $template, Context $context, $args, $source)
     {

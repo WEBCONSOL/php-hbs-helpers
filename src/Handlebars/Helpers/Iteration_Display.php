@@ -6,14 +6,15 @@ use Handlebars\Context;
 use Handlebars\Helper;
 use Handlebars\Template;
 
-class CSSFileHelper implements Helper
+class Iteration_Display implements Helper
 {
     public function execute(Template $template, Context $context, $args, $source)
     {
         $parsedArgs = $template->parseArguments($args);
-        if ($parsedArgs[0]) {
-            return '<link rel="stylesheet" type="text/css" href="' . $parsedArgs[0] . '"/>';
+        $v = isset($parsedArgs[0]) ? $context->get($parsedArgs[0]) : '';
+        if (is_numeric($v)) {
+            return (int)$v + 1;
         }
-        return '';
+        return $v;
     }
 }

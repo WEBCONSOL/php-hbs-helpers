@@ -6,7 +6,7 @@ use Handlebars\Context;
 use Handlebars\Helper;
 use Handlebars\Template;
 
-class NumberFormatHelper implements Helper
+class Number_Format implements Helper
 {
     public function execute(Template $template, Context $context, $args, $source)
     {

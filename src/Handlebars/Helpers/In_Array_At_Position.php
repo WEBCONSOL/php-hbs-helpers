@@ -5,21 +5,17 @@ namespace Handlebars\Helpers;
 use Handlebars\Context;
 use Handlebars\Helper;
 use Handlebars\Template;
-use RuntimeException;
 
-class GtEqHelper implements Helper
+class In_Array_At_Position implements Helper
 {
     public function execute(Template $template, Context $context, $args, $source)
     {
         $parsedArgs = $template->parseArguments($args);
-        $tmp1 = $context->get($parsedArgs[0]);
-        $tmp2 = $context->get($parsedArgs[1]);
+        $needle = isset($parsedArgs[0]) ? $context->get($parsedArgs[0]) : null;
+        $haystack = isset($parsedArgs[1]) ? $context->get($parsedArgs[1]) : null;
+        $key = isset($parsedArgs[2]) ? $context->get($parsedArgs[2]) : null;
 
-        if (!is_numeric($tmp1) || !is_numeric($tmp2)) {
-            throw new RuntimeException("Both arguments must be numerical value", 500);
-        }
-
-        if ($tmp1 >= $tmp2) {
+        if ($haystack && $key !== null && is_array($haystack) && isset($haystack[$key]) && $haystack[$key] === $needle) {
             $template->setStopToken('else');
             $buffer = $template->render($context);
             $template->setStopToken(false);

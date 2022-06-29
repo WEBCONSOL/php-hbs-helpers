@@ -6,7 +6,7 @@ use Handlebars\Context;
 use Handlebars\Helper;
 use Handlebars\Template;
 
-class Base64_EncodeHelper implements Helper
+class Base64_Encode implements Helper
 {
     public function execute(Template $template, Context $context, $args, $source)
     {

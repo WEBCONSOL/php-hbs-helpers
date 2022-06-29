@@ -7,7 +7,7 @@ use Handlebars\Helper;
 use Handlebars\Template;
 use RuntimeException;
 
-class LtHelper implements Helper
+class Gt implements Helper
 {
     public function execute(Template $template, Context $context, $args, $source)
     {
@@ -19,7 +19,7 @@ class LtHelper implements Helper
             throw new RuntimeException("Both arguments must be numerical value", 500);
         }
 
-        if ($tmp1 < $tmp2) {
+        if ($tmp1 > $tmp2) {
             $template->setStopToken('else');
             $buffer = $template->render($context);
             $template->setStopToken(false);

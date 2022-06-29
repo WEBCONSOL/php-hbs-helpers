@@ -6,7 +6,7 @@ use Handlebars\Context;
 use Handlebars\Helper;
 use Handlebars\Template;
 
-class Strip_TagsHelper implements Helper
+class Strip_Tags implements Helper
 {
     public function execute(Template $template, Context $context, $args, $source)
     {
