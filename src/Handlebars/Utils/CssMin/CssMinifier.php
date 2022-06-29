@@ -2,6 +2,8 @@
 
 namespace Handlebars\Utils\CssMin;
 
+use Handlebars\Utils\CssMin;
+
 /**
  * CSS Minifier.
  *

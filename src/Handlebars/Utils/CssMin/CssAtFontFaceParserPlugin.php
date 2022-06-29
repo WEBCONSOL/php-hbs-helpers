@@ -2,6 +2,8 @@
 
 namespace Handlebars\Utils\CssMin;
 
+use Handlebars\Utils\CssMin;
+
 /**
  * {@link aCssParserPlugin Parser plugin} for parsing @font-face at-rule block with including declarations.
  *

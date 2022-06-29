@@ -2,6 +2,8 @@
 
 namespace Handlebars\Utils\CssMin;
 
+use Handlebars\Utils\CssMin;
+
 /**
  * CSS Parser.
  *
@@ -93,7 +95,7 @@ class CssParser
         {
             if ($config !== false)
             {
-                $class	= "Handlebars/Utils/CssMin/Css" . $name . "ParserPlugin";
+                $class	= "Handlebars\Utils\CssMin\Css" . $name . "ParserPlugin";
                 $config = is_array($config) ? $config : array();
                 $cls = new $class($this, $config);
                 if (class_exists($class))

@@ -2,6 +2,8 @@
 
 namespace Handlebars\Utils\CssMin;
 
+use Handlebars\Utils\CssMin;
+
 /**
  * This {@link aCssMinifierPlugin} will process var-statement and sets the declaration value to the variable value.
  *

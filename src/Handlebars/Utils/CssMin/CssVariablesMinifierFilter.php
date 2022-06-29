@@ -2,6 +2,8 @@
 
 namespace Handlebars\Utils\CssMin;
 
+use Handlebars\Utils\CssMin;
+
 /**
  * This {@link aCssMinifierFilter minifier filter} will parse the variable declarations out of @variables at-rule
  * blocks. The variables will get store in the {@link CssVariablesMinifierPlugin} that will apply the variables to

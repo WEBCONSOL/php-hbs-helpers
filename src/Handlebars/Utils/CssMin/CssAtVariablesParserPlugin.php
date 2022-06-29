@@ -2,6 +2,8 @@
 
 namespace Handlebars\Utils\CssMin;
 
+use Handlebars\Utils\CssMin;
+
 /**
  * {@link aCssParserPlugin Parser plugin} for parsing @variables at-rule block with including declarations.
  *

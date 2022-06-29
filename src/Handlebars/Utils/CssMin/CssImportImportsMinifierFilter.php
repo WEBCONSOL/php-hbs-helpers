@@ -2,6 +2,8 @@
 
 namespace Handlebars\Utils\CssMin;
 
+use Handlebars\Utils\CssMin;
+
 /**
  * This {@link aCssMinifierFilter minifier filter} import external css files defined with the @import at-rule into the
  * current stylesheet.
