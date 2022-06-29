@@ -7,7 +7,7 @@ use Handlebars\Helper;
 use Handlebars\I18N;
 use Handlebars\Template;
 
-class I18N implements Helper
+class I18NHelper implements Helper
 {
     public function execute(Template $template, Context $context, $args, $source)
     {
