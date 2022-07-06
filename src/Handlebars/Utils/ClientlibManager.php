@@ -341,7 +341,9 @@ class ClientlibManager
                         $d = dirname($file);
                         $this->fetchFilesBy($d, $filename, $ext);
                     }
-                    $this->files[] = $file;
+                    else {
+                        $this->files[] = $file;
+                    }
                 }
             }
         }
